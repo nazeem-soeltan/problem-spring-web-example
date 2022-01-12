@@ -9,7 +9,7 @@ import org.zalando.problem.StatusType;
 
 import dev.nazeem.problem.example.exceptions.ApiErrorException;
 
-public interface DefaultProblemHandling extends ApiErrorTrait, BasicThrowableTrait {
+public interface DefaultProblemHandler extends ApiErrorTrait, BasicThrowableTrait {
 
     @Override
     @ParametersAreNonnullByDefault

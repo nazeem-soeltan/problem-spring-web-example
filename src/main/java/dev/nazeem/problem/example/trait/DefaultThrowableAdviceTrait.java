@@ -10,7 +10,7 @@ import org.zalando.problem.ProblemBuilder;
 import org.zalando.problem.StatusType;
 import org.zalando.problem.spring.web.advice.general.ThrowableAdviceTrait;
 
-public interface BasicThrowableTrait extends ThrowableAdviceTrait {
+public interface DefaultThrowableAdviceTrait extends ThrowableAdviceTrait {
 
     String DEFAULT_DETAIL = "An error occurred";
 

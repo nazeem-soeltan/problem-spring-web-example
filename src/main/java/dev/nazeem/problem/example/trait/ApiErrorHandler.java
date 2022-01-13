@@ -9,7 +9,7 @@ import org.zalando.problem.StatusType;
 
 import dev.nazeem.problem.example.exceptions.ApiErrorException;
 
-public interface DefaultProblemHandler extends ApiErrorTrait, BasicThrowableTrait {
+public interface ApiErrorHandler extends BaseProblemHandler, ApiErrorAdviceTrait, DefaultThrowableAdviceTrait {
 
     @Override
     @ParametersAreNonnullByDefault
@@ -17,9 +17,9 @@ public interface DefaultProblemHandler extends ApiErrorTrait, BasicThrowableTrai
             final Throwable throwable, final StatusType status, final URI type
     ) {
         if (throwable instanceof ApiErrorException) {
-            return ApiErrorTrait.super.prepare(throwable, status, type);
+            return ApiErrorAdviceTrait.super.prepare(throwable, status, type);
         } else {
-            return BasicThrowableTrait.super.prepare(throwable, status, type);
+            return DefaultThrowableAdviceTrait.super.prepare(throwable, status, type);
         }
     }
 

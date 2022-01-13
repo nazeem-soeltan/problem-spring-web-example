@@ -17,7 +17,7 @@ import org.zalando.problem.spring.web.advice.AdviceTrait;
 
 import dev.nazeem.problem.example.exceptions.ApiErrorException;
 
-public interface ApiErrorTrait extends AdviceTrait {
+public interface ApiErrorAdviceTrait extends AdviceTrait {
 
     @ExceptionHandler(ApiErrorException.class)
     default ResponseEntity<Problem> handleApiErrorException(

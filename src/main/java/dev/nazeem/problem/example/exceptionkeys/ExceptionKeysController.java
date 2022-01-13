@@ -1,15 +1,18 @@
 package dev.nazeem.problem.example.exceptionkeys;
 
+import static dev.nazeem.problem.example.security.UserRoles.ROLE_DEVELOPER;
 import static org.springframework.http.HttpStatus.OK;
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 import static org.springframework.http.MediaType.APPLICATION_PROBLEM_JSON_VALUE;
 
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
+import dev.nazeem.problem.example.security.UserRoles;
 import dev.nazeem.problem.example.thrower.ExceptionThrowerService;
 import lombok.RequiredArgsConstructor;
 
@@ -35,6 +38,7 @@ public class ExceptionKeysController {
             path = "/{exception-key}",
             produces = {APPLICATION_PROBLEM_JSON_VALUE})
     @ResponseStatus(OK)
+    @Secured({ROLE_DEVELOPER})
     public void throwException(
             @PathVariable("exception-key") final String exceptionKey
     ) {

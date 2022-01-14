@@ -6,6 +6,7 @@ import java.util.Set;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import dev.nazeem.problem.example.exceptions.NoThrowerFoundException;
@@ -17,6 +18,7 @@ public class ExceptionThrowerService {
 
     public ExceptionThrowerService(final List<Thrower> throwers) {
         this.throwerMap = throwers.stream()
+                .filter(t -> !(t instanceof CustomThrower))
                 .collect(Collectors.toMap(Thrower::getKey, Function.identity()));
     }
 
@@ -30,7 +32,16 @@ public class ExceptionThrowerService {
         thrower.throwNow();
     }
 
+    public void throwCustomException(final String exceptionKey, final int status) {
+        final HttpStatus httpStatus = HttpStatus.resolve(status);
+
+        final CustomThrower customThrower = new CustomThrower(exceptionKey, httpStatus);
+
+        customThrower.throwNow();
+    }
+
     public Set<String> getExceptionKeys() {
         return throwerMap.keySet();
     }
+
 }

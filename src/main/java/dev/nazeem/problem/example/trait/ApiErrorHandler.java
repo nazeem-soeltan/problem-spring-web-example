@@ -9,7 +9,9 @@ import org.zalando.problem.StatusType;
 
 import dev.nazeem.problem.example.exceptions.ApiErrorException;
 
-public interface ApiErrorHandler extends BaseProblemHandler, ApiErrorAdviceTrait, DefaultThrowableAdviceTrait {
+public interface ApiErrorHandler extends BaseProblemHandler, ApiErrorAdviceTrait,
+        CustomConstraintViolationAdviceTrait, CustomMethodArgumentNotValidAdviceTrait, CustomBindAdviceTrait,
+        DefaultThrowableAdviceTrait {
 
     @Override
     @ParametersAreNonnullByDefault
@@ -21,6 +23,11 @@ public interface ApiErrorHandler extends BaseProblemHandler, ApiErrorAdviceTrait
         } else {
             return DefaultThrowableAdviceTrait.super.prepare(throwable, status, type);
         }
+    }
+
+    @Override
+    default boolean showViolations() {
+        return false;
     }
 
 }

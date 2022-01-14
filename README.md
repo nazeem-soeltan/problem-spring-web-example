@@ -6,10 +6,11 @@ Problem Spring Web is a library that provides an implementation of [RFC4708: Pro
 
 ## Features
 
-* `DefaultThrowableAdviceTrait` transforms an _Exception_ to a _Problem_. Optionally allowing the _detail_ of a _Problem_ to be generic. Useful to not expose (possible) API internals.
-* `ApiErrorTrait` transforms an `ApiException` to a _Problem_.
-* `ApiException` to have fine-grained control on which HTTP status and title to use for a _Problem_.
+* `ApiException` to have fine-grained control on which HTTP status, title and optional error code to use for a _Problem_.
+* `ApiErrorAdviceTrait` transforms an `ApiException` to a _Problem_.
+* `DefaultThrowableAdviceTrait` transforms an _Exception_ to a _Problem_.
 * `ApiErrorHandler` to delegate `ApiException` to `ApiErrorAdviceTrait`, otherwise `DefaultThrowableAdviceTrait`.
+* `CustomBindAdviceTrait`, `CustomConstraintViolationAdviceTrait` and `CustomMethodArgumentNotValidAdviceTrait` to allow violations to be omitted.
 
 ## Usage
 
@@ -41,4 +42,18 @@ curl --request GET \
   --url http://localhost:8080/api/exception-keys/access-denied \
   --header 'X-Consumer-Authorities: ROLE_DEVELOPER' \
   --header 'X-Consumer-Username: nazeem'
+```
+
+Also possible to throw customizable exceptions
+
+```shell
+curl --request POST \
+  --url http://localhost:8080/api/exception-keys/ \
+  --header 'Content-Type: application/json' \
+  --header 'X-Consumer-Authorities: ROLE_DEVELOPER' \
+  --header 'X-Consumer-Username: nazeem' \
+  --data '{
+	"key": "any-key",
+	"status": 401
+}'
 ```

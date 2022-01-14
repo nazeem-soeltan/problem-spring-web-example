@@ -9,9 +9,4 @@ public class ExceptionHandler implements ApiErrorHandler {
 
     // Put some further custom 'non-default' processing here, if needed.
 
-    @Override
-    public boolean enableDefaultDetail() {
-        return false;
-    }
-
 }

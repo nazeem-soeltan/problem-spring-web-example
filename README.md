@@ -11,6 +11,8 @@ Problem Spring Web is a library that provides an implementation of [RFC4708: Pro
 * `DefaultThrowableAdviceTrait` transforms an _Exception_ to a _Problem_.
 * `ApiErrorHandler` to delegate `ApiException` to `ApiErrorAdviceTrait`, otherwise `DefaultThrowableAdviceTrait`.
 * `CustomBindAdviceTrait`, `CustomConstraintViolationAdviceTrait` and `CustomMethodArgumentNotValidAdviceTrait` to allow violations to be omitted.
+* `TraceableConstraintViolationProblem` to provide a trace ID parameter on a `ConstraintViolationProblem`.
+* `TraceableProblemCreator` to create a Problem with the trace ID parameter, as it is not possible to add this in a generic way.
 
 ## Usage
 

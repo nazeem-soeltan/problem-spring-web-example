@@ -23,8 +23,6 @@ public interface CustomConstraintViolationAdviceTrait extends ConstraintViolatio
         }
     }
 
-    default boolean showViolations() {
-        return false;
-    }
+    default boolean showViolations() {return false; }
 
 }

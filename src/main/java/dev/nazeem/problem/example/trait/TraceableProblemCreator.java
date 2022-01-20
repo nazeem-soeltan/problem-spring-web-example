@@ -1,8 +1,7 @@
 package dev.nazeem.problem.example.trait;
 
+import static dev.nazeem.problem.example.trait.DefaultParamKeys.*;
 import static java.util.Objects.isNull;
-
-import java.util.Objects;
 
 import org.springframework.http.ResponseEntity;
 import org.zalando.problem.Problem;
@@ -37,7 +36,7 @@ public class TraceableProblemCreator {
         final ProblemBuilder problemBuilder = Problem.builder();
 
         problem.getParameters().forEach(problemBuilder::with);
-        problemBuilder.with("trace-id", traceId);
+        problemBuilder.with(TRACE_ID.getKeyValue(), traceId);
 
         if(problem instanceof ThrowableProblem) {
             problemBuilder.withCause(((ThrowableProblem) problem).getCause());

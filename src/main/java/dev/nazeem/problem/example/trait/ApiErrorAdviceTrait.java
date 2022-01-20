@@ -7,6 +7,7 @@ import java.net.URI;
 import javax.annotation.ParametersAreNonnullByDefault;
 
 import org.springframework.http.ResponseEntity;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.context.request.NativeWebRequest;
 import org.zalando.problem.Problem;
@@ -36,10 +37,14 @@ public interface ApiErrorAdviceTrait extends ResponseStatusAdviceTrait {
 
         final ProblemBuilder builder = ResponseStatusAdviceTrait.super.prepare(throwable, status, type);
 
+        final String errorCode = exception.getErrorCode();
+        if(StringUtils.hasText(errorCode)) {
+            builder.with(DefaultParamKeys.ERROR_CODE.getKeyValue(), errorCode);
+        }
+
         return builder
                 .withTitle(title)
-                .withDetail(exception.getReason())
-                .with("error-code", exception.getErrorCode());
+                .withDetail(exception.getReason());
     }
 
 }

@@ -1,5 +1,7 @@
 package dev.nazeem.problem.example.trait;
 
+import static dev.nazeem.problem.example.trait.DefaultParamKeys.TRACE_ID;
+
 import java.net.URI;
 import java.util.List;
 import java.util.Map;
@@ -16,7 +18,7 @@ public final class TraceableConstraintViolationProblem extends ConstraintViolati
             final URI type, final StatusType status, final List<Violation> violations, final String traceId
     ) {
         super(type, status, violations);
-        this.parameters = Map.of("trace-id", traceId);
+        this.parameters = Map.of(TRACE_ID.getKeyValue(), traceId);
     }
 
     @Override
